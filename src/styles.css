@@ -1,0 +1,281 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system: 16-bit JRPG (Final Fantasy VI inspired).
+ * Palette: deep midnight navy/violet, magitek teal, menu gold.
+ * All colors are oklch semantic tokens — never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-magic: var(--magic);
+  --color-gold: var(--gold);
+  --font-pixel: "Press Start 2P", monospace;
+  --font-body: "VT323", monospace;
+}
+
+:root {
+  --radius: 0px;
+  --background: oklch(0.17 0.055 275);
+  --foreground: oklch(0.95 0.015 280);
+  --card: oklch(0.24 0.06 277);
+  --card-foreground: oklch(0.96 0.012 280);
+  --popover: oklch(0.24 0.06 277);
+  --popover-foreground: oklch(0.96 0.012 280);
+  --primary: oklch(0.82 0.14 88);
+  --primary-foreground: oklch(0.2 0.05 277);
+  --secondary: oklch(0.32 0.07 278);
+  --secondary-foreground: oklch(0.95 0.012 280);
+  --muted: oklch(0.28 0.055 278);
+  --muted-foreground: oklch(0.78 0.03 270);
+  --accent: oklch(0.72 0.13 190);
+  --accent-foreground: oklch(0.18 0.05 277);
+  --destructive: oklch(0.6 0.2 20);
+  --destructive-foreground: oklch(0.97 0.01 280);
+  --border: oklch(0.55 0.08 265);
+  --input: oklch(0.3 0.06 278);
+  --ring: oklch(0.82 0.14 88);
+  --magic: oklch(0.78 0.16 168);
+  --gold: oklch(0.85 0.15 90);
+
+  --window-gradient: linear-gradient(
+    180deg,
+    oklch(0.3 0.09 272) 0%,
+    oklch(0.21 0.07 275) 100%
+  );
+  --shadow-window: 0 0 0 3px oklch(0.13 0.05 275), 0 6px 0 0 oklch(0.13 0.05 275 / 60%);
+  --shadow-glow: 0 0 18px oklch(0.82 0.14 88 / 30%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    image-rendering: pixelated;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-pixel);
+    line-height: 1.6;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+}
+
+/* Starfield / dither texture over the page */
+@utility pixel-veil {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      oklch(0 0 0 / 22%) 0px,
+      oklch(0 0 0 / 22%) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+}
+
+@utility pixel-window {
+  background: var(--window-gradient);
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-window);
+  padding: 1.25rem 1.5rem;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border: 1px solid oklch(0.8 0.1 90 / 25%);
+    pointer-events: none;
+  }
+}
+
+@utility pixel-window-title {
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--color-gold);
+  text-shadow: 2px 2px 0 oklch(0.13 0.05 275);
+  margin-bottom: 1rem;
+}
+
+@utility pixel-window-body {
+  color: var(--color-foreground);
+}
+
+@utility pixel-heading {
+  font-size: clamp(1.1rem, 4vw, 2rem);
+  color: var(--color-foreground);
+  text-shadow:
+    3px 3px 0 oklch(0.13 0.05 275),
+    0 0 22px oklch(0.82 0.14 88 / 25%);
+}
+
+@utility pixel-badge {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  padding: 0.35rem 0.5rem;
+  border: 2px solid var(--color-border);
+  background: var(--color-muted);
+  color: var(--color-foreground);
+}
+
+@utility pixel-badge-gold {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+@utility pixel-badge-magic {
+  border-color: var(--color-magic);
+  color: var(--color-magic);
+}
+
+@utility pixel-scene {
+  border: 3px solid var(--color-border);
+  box-shadow: var(--shadow-window);
+  overflow: hidden;
+  line-height: 0;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+  }
+}
+
+@utility pixel-link {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  color: var(--color-muted-foreground);
+  padding: 0.4rem 0.15rem;
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    color: var(--color-gold);
+    border-bottom-color: var(--color-gold);
+  }
+}
+
+@utility pixel-link-active {
+  color: var(--color-gold);
+  border-bottom-color: var(--color-gold);
+}
+
+@utility pixel-cta {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: 0.65rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border: 3px solid oklch(0.13 0.05 275);
+  box-shadow: 0 4px 0 0 oklch(0.13 0.05 275);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 0 oklch(0.13 0.05 275), var(--shadow-glow);
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 0 oklch(0.13 0.05 275);
+  }
+}
+
+@utility pixel-cta-ghost {
+  background: transparent;
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 0 0 oklch(0.13 0.05 275);
+}
+
+/* Blinking FF-style cursor */
+@utility pixel-cursor {
+  &::after {
+    content: "▼";
+    margin-left: 0.4rem;
+    color: var(--color-gold);
+    animation: pixel-blink 1s steps(2, start) infinite;
+  }
+}
+
+@keyframes pixel-blink {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Falling pixel snow */
+.pixel-flake {
+  position: absolute;
+  top: -8px;
+  background: oklch(0.98 0.01 250);
+  box-shadow: 0 0 0 1px oklch(0.85 0.03 250 / 0.35);
+  animation-name: pixel-snowfall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@keyframes pixel-snowfall {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(var(--flake-drift, 0px), 110vh, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pixel-flake {
+    animation: none;
+    display: none;
+  }
+}
