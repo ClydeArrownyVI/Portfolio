@@ -4,7 +4,7 @@
 - **Lovable (lovable.dev)**
 - **Gemini (gemini.google.com)**
 
-## Prompts / Instructions Given (lovable.ai)
+## Prompts / Instructions Given (lovable.dev)
 
 1. "Make me a simple portfolio and use Final Fantasy 6 pixelated art style as theme and background (No characters, just the scenes and theme), cover all the requirements and make it extensible."
    - Provided academic catalogue and personal details for content.
