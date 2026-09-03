@@ -1,7 +1,8 @@
 # AI Tools and Prompts Used
 
 ## Tools Used
-- **Lovable (lovable.dev)** — AI-powered full-stack web development platform used to build, style, and deploy the portfolio.
+- **Lovable (lovable.dev)**
+- **Gemini (gemini.google.com)**
 
 ## Prompts / Instructions Given (lovable.ai)
 
